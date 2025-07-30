@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kovrin | Cybersecurity R&D Lab</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: #0f1419;
+            color: #e2e8f0;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 150, 143, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 150, 143, 0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -2;
+            opacity: 0.3;
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #ff968f;
+            border-radius: 50%;
+            opacity: 0;
+            filter: blur(0.5px);
+            box-shadow: 0 0 6px rgba(255, 150, 143, 0.8);
+            mix-blend-mode: screen;
+        }
+
+        .particle:nth-child(odd) {
+            background: #ed6071;
+        }
+
+        .particle:nth-child(3n) {
+            background: #ffffff;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) translateX(0px);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-20px) translateX(40px);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(15, 20, 25, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .nav-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 70px;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            list-style: none;
+            gap: 2px;
+        }
+
+        .nav-item {
+            margin: 0;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 10px 18px;
+            color: rgba(226, 232, 240, 0.7);
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .nav-link:hover {
+            color: #ff968f;
+            background: rgba(255, 150, 143, 0.08);
+            border-color: rgba(255, 150, 143, 0.2);
+        }
+
+        .nav-link.active {
+            color: #ff968f;
+            background: rgba(255, 150, 143, 0.12);
+            border-color: rgba(255, 150, 143, 0.3);
+            font-weight: 600;
+        }
+
+        .nav-icon {
+            width: 16px;
+            height: 16px;
+            margin-right: 6px;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #e2e8f0;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 6px;
+        }
+
+        header {
+            padding: 140px 0 80px;
+            text-align: center;
+            position: relative;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: linear-gradient(180deg, rgba(15, 20, 25, 0.8) 0%, rgba(15, 20, 25, 1) 100%);
+        }
+
+        .logo {
+            font-size: 4.5rem;
+            font-weight: 800;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, #ffffff 0%, #ff968f 50%, #ed6071 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -3px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, #ffffff, #ff968f, #ed6071);
+            border-radius: 2px;
+            animation: underlineGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes underlineGlow {
+            0% { 
+                box-shadow: 0 0 5px rgba(255, 150, 143, 0.5);
+                width: 100px;
+            }
+            100% { 
+                box-shadow: 0 0 20px rgba(237, 96, 113, 0.8);
+                width: 120px;
+            }
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            color: rgba(226, 232, 240, 0.8);
+            margin-bottom: 48px;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #ff968f 0%, #ed6071 100%);
+            color: #ffffff;
+            padding: 18px 36px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 
+                0 10px 30px rgba(255, 150, 143, 0.3),
+                0 0 0 0 rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 
+                0 20px 50px rgba(255, 150, 143, 0.4),
+                0 0 0 8px rgba(255, 255, 255, 0.1);
+        }
+
+        .contact-btn:hover::before {
+            left: 100%;
+        }
+
+        main {
+            flex: 1;
+            padding: 60px 0;
+        }
+
+        .section {
+            margin-bottom: 80px;
+            padding: 0 20px;
+        }
+
+        .section-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 50px 40px;
+            margin: 40px 0;
+            position: relative;
+            transition: all 0.6s ease;
+        }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.06);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .section-title {
+            font-size: 2.4rem;
+            margin-bottom: 32px;
+            text-align: center;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffffff 0%, #ff968f 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+
+        .section-content {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: rgba(226, 232, 240, 0.85);
+            text-align: center;
+        }
+
+        .section-content p {
+            margin-bottom: 24px;
+        }
+
+        .mission {
+            background: rgba(255, 150, 143, 0.05);
+            border: 1px solid rgba(255, 150, 143, 0.2);
+        }
+
+        .mission .section-title {
+            background: linear-gradient(135deg, #ff968f 0%, #ffffff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .what-we-do {
+            background: rgba(237, 96, 113, 0.05);
+            border: 1px solid rgba(237, 96, 113, 0.2);
+        }
+
+        .what-we-do .section-title {
+            background: linear-gradient(135deg, #ed6071 0%, #ffffff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .current-focus {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .current-focus .section-title {
+            background: linear-gradient(135deg, #ffffff 0%, #ff968f 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ff968f, transparent);
+            opacity: 0;
+            transition: opacity 0.6s ease;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .mission::before {
+            background: linear-gradient(90deg, transparent, #ff968f, transparent);
+        }
+
+        .what-we-do::before {
+            background: linear-gradient(90deg, transparent, #ed6071, transparent);
+        }
+
+        .current-focus::before {
+            background: linear-gradient(90deg, transparent, #ffffff, transparent);
+        }
+
+        .section-card:hover::before {
+            opacity: 1;
+        }
+
+        .dev-indicator {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(255, 150, 143, 0.1);
+            color: #ff968f;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 24px;
+            border: 1px solid rgba(255, 150, 143, 0.3);
+        }
+
+        .dev-indicator::before {
+            content: '🚀';
+            margin-right: 8px;
+        }
+
+        .highlight-text {
+            color: #ff968f;
+            font-weight: 600;
+        }
+
+        footer {
+            background: rgba(10, 10, 15, 0.8);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .footer-text {
+            color: rgba(226, 232, 240, 0.6);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-content {
+                justify-content: space-between;
+            }
+
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(15, 20, 25, 0.98);
+                backdrop-filter: blur(20px);
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+                padding: 20px 0;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .nav-link {
+                width: calc(100% - 32px);
+                margin: 4px 16px;
+                padding: 12px 16px;
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+
+            .logo {
+                font-size: 3.2rem;
+                letter-spacing: -2px;
+            }
+
+            .tagline {
+                font-size: 1.3rem;
+                margin-bottom: 36px;
+            }
+
+            .contact-btn {
+                padding: 16px 32px;
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .section-content {
+                font-size: 1.1rem;
+                padding: 0 10px;
+            }
+
+            .section-card {
+                padding: 30px 25px;
+                margin: 30px 10px;
+            }
+
+            header {
+                padding: 120px 0 60px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 2.8rem;
+                letter-spacing: -1px;
+            }
+
+            .tagline {
+                font-size: 1.2rem;
+            }
+
+            .section-content {
+                font-size: 1rem;
+            }
+
+            .section-card {
+                padding: 25px 20px;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+
+        .section {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .section:nth-child(1) { animation-delay: 0.2s; }
+        .section:nth-child(2) { animation-delay: 0.4s; }
+        .section:nth-child(3) { animation-delay: 0.6s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        header {
+            opacity: 0;
+            animation: fadeIn 1.2s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        .section-content p {
+            transition: color 0.3s ease;
+        }
+
+        .section-card:hover .section-content p {
+            color: rgba(226, 232, 240, 0.95);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-content">
+            <button class="nav-toggle" onclick="toggleNav()">☰</button>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item">
+                    <a href="/index.html" class="nav-link active">
+                        <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                        </svg>
+                        Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/research.html" class="nav-link">
+                        <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z"/>
+                        </svg>
+                        Research
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/projects/index.html" class="nav-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="3"/>
+                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09c.66 0 1.26-.39 1.51-1a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.09c.61-.16 1-.75 1-1.37V3a2 2 0 1 1 4 0v.09c0 .66.39 1.26 1 1.51h.09c.41.17.87.11 1.22-.13a1.65 1.65 0 0 0 .6-.6 2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.09c.16.61.75 1 1.37 1H21a2 2 0 1 1 0 4h-.09c-.62 0-1.21.39-1.37 1z"/>
+                        </svg>
+                        Projects
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/blog.html" class="nav-link">
+                        <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.89 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/>
+                        </svg>
+                        Blog
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/contact.html" class="nav-link">
+                        <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8l8 5 8-5v10zm-8-7L4 6h16l-8 5z"/>
+                        </svg>
+                        Contact
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="particles">
+        <!-- Particles will be generated by JavaScript -->
+    </div>
+    
+    <header>
+        <div class="container">
+            <h1 class="logo">Kovrin</h1>
+            <p class="tagline">Cybersecurity Research & Development Laboratory</p>
+            <a href="/contact.html" class="contact-btn">Get In Touch</a>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="section">
+                <div class="section-card mission">
+                    <div class="dev-indicator">Research Laboratory</div>
+                    <h2 class="section-title">Our Mission</h2>
+                    <div class="section-content">
+                        <p>Kovrin is an independent <span class="highlight-text">cybersecurity research laboratory</span> dedicated to advancing defensive capabilities through innovative machine learning applications and practical security solutions.</p>
+                        <p>We bridge the gap between academic research and real-world implementation, developing <span class="highlight-text">open-source tools and methodologies</span> that strengthen the global cybersecurity ecosystem while maintaining a focus on privacy-preserving technologies.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="section-card what-we-do">
+                    <h2 class="section-title">Research Focus</h2>
+                    <div class="section-content">
+                        <p>Our research spans <span class="highlight-text">machine learning-driven threat detection</span>, behavioral analysis for anomaly identification, and privacy-preserving security technologies. We specialize in lightweight, deployable solutions suitable for resource-constrained environments.</p>
+                        <p>Current active projects include <span class="highlight-text">Project AEGIS</span> (ML-based network anomaly detection) and <span class="highlight-text">Project SHADOW</span> (privacy-preserving behavioral analytics), both designed to address modern cybersecurity challenges with practical, scalable approaches.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="section-card current-focus">
+                    <h2 class="section-title">Current Phase</h2>
+                    <div class="section-content">
+                        <p>Kovrin is currently in its <span class="highlight-text">research and development phase</span>, focusing on prototype validation and establishing research partnerships with academic institutions and industry collaborators.</p>
+                        <p>Our approach emphasizes <span class="highlight-text">open-source contributions</span> and transparent research methodologies, with plans to transition promising research outcomes into production-ready security tools and potential commercial applications.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="footer-text">© 2025 Kovrin. Advancing cybersecurity through research and innovation.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleNav() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+        }
+
+        document.addEventListener('click', function(event) {
+            const nav = document.querySelector('nav');
+            const navMenu = document.getElementById('navMenu');
+            
+            if (!nav.contains(event.target)) {
+                navMenu.classList.remove('active');
+            }
+        });
+
+        function updateActiveNav() {
+            const currentPath = window.location.pathname;
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === currentPath || 
+                    (currentPath === '/' && link.getAttribute('href') === '/index.html')) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        updateActiveNav();
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            
+            // Position particles only within viewport width
+            const leftPos = Math.random() * 100;
+            particle.style.left = leftPos + '%';
+            
+            // Randomize animation timing and duration
+            const duration = 8 + Math.random() * 4; // 8-12 seconds
+            const delay = Math.random() * 2; // 0-2 second delay
+            
+            particle.style.animation = `floatUp ${duration}s linear ${delay}s forwards`;
+            
+            // Random colors
+            const colors = ['#ff968f', '#ed6071', '#ffffff'];
+            const colorIndex = Math.floor(Math.random() * colors.length);
+            particle.style.background = colors[colorIndex];
+            
+            document.querySelector('.particles').appendChild(particle);
+            
+            // Remove particle after animation completes
+            setTimeout(() => {
+                if (particle.parentNode) {
+                    particle.parentNode.removeChild(particle);
+                }
+            }, (duration + delay + 1) * 1000);
+        }
+
+        function initParticles() {
+            // Create initial batch with staggered timing
+            for (let i = 0; i < 15; i++) {
+                setTimeout(createParticle, i * 300);
+            }
+        }
+
+        // Initialize particles after page load
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(initParticles, 500); // Wait for page to fully load
+        });
+
+        // Continue creating particles at intervals
+        setInterval(createParticle, 600);
+    </script>
+</body>
+</html>
