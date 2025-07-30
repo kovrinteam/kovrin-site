@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kovrin | Cybersecurity R&D Lab</title>
+    <title>Projects | Kovrin - Cybersecurity R&D Lab</title>
     <style>
         * {
             margin: 0;
@@ -17,10 +17,6 @@
             color: #e2e8f0;
             line-height: 1.6;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            overflow-x: hidden;
-            position: relative;
         }
 
         body::before {
@@ -34,56 +30,8 @@
                 linear-gradient(rgba(255, 150, 143, 0.02) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(255, 150, 143, 0.02) 1px, transparent 1px);
             background-size: 50px 50px;
-            z-index: -2;
-            opacity: 0.3;
-        }
-
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
             z-index: -1;
-            pointer-events: none;
-            overflow: hidden;
-        }
-
-        .particle {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: #ff968f;
-            border-radius: 50%;
-            opacity: 0;
-            filter: blur(0.5px);
-            box-shadow: 0 0 6px rgba(255, 150, 143, 0.8);
-            mix-blend-mode: screen;
-        }
-
-        .particle:nth-child(odd) {
-            background: #ed6071;
-        }
-
-        .particle:nth-child(3n) {
-            background: #ffffff;
-        }
-
-        @keyframes floatUp {
-            0% {
-                transform: translateY(100vh) translateX(0px);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.6;
-            }
-            90% {
-                opacity: 0.6;
-            }
-            100% {
-                transform: translateY(-20px) translateX(40px);
-                opacity: 0;
-            }
+            opacity: 0.3;
         }
 
         .container {
@@ -120,10 +68,6 @@
             gap: 2px;
         }
 
-        .nav-item {
-            margin: 0;
-        }
-
         .nav-link {
             display: flex;
             align-items: center;
@@ -156,248 +100,326 @@
             margin-right: 6px;
         }
 
-        .nav-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: #e2e8f0;
-            font-size: 1.2rem;
-            cursor: pointer;
-            padding: 8px;
-            border-radius: 6px;
-        }
-
         header {
-            padding: 140px 0 80px;
-            text-align: center;
-            position: relative;
+            padding: 120px 0 50px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             background: linear-gradient(180deg, rgba(15, 20, 25, 0.8) 0%, rgba(15, 20, 25, 1) 100%);
         }
 
-        .logo {
-            font-size: 4.5rem;
-            font-weight: 800;
-            margin-bottom: 24px;
-            background: linear-gradient(135deg, #ffffff 0%, #ff968f 50%, #ed6071 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -3px;
-            position: relative;
-            display: inline-block;
+        .header-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            text-align: left;
+            max-width: 900px;
         }
 
-        .logo::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
-            background: linear-gradient(90deg, #ffffff, #ff968f, #ed6071);
-            border-radius: 2px;
-            animation: underlineGlow 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes underlineGlow {
-            0% { 
-                box-shadow: 0 0 5px rgba(255, 150, 143, 0.5);
-                width: 100px;
-            }
-            100% { 
-                box-shadow: 0 0 20px rgba(237, 96, 113, 0.8);
-                width: 120px;
-            }
-        }
-
-        .tagline {
-            font-size: 1.5rem;
-            color: rgba(226, 232, 240, 0.8);
-            margin-bottom: 48px;
-            font-weight: 400;
-            letter-spacing: 0.5px;
-        }
-
-        .contact-btn {
-            display: inline-flex;
-            align-items: center;
-            background: linear-gradient(135deg, #ff968f 0%, #ed6071 100%);
+        .page-title {
+            font-size: 2.8rem;
+            font-weight: 700;
             color: #ffffff;
-            padding: 18px 36px;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
+            margin-bottom: 15px;
+            letter-spacing: -0.5px;
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            color: #ff968f;
+            margin-bottom: 25px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .page-description {
             font-size: 1.1rem;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 
-                0 10px 30px rgba(255, 150, 143, 0.3),
-                0 0 0 0 rgba(255, 255, 255, 0.1);
+            color: rgba(226, 232, 240, 0.8);
+            line-height: 1.7;
+            max-width: 700px;
+        }
+
+        main {
+            padding: 60px 0;
+        }
+
+        .content-section {
+            margin-bottom: 80px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(255, 150, 143, 0.2);
+        }
+
+        .section-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: rgba(255, 150, 143, 0.3);
+            margin-right: 20px;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .section-subtitle {
+            font-size: 1rem;
+            color: rgba(226, 232, 240, 0.6);
+            margin-top: 5px;
+            font-weight: 400;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 35px;
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
         }
 
-        .contact-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.6s ease;
-        }
-
-        .contact-btn:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 
-                0 20px 50px rgba(255, 150, 143, 0.4),
-                0 0 0 8px rgba(255, 255, 255, 0.1);
-        }
-
-        .contact-btn:hover::before {
-            left: 100%;
-        }
-
-        main {
-            flex: 1;
-            padding: 60px 0;
-        }
-
-        .section {
-            margin-bottom: 80px;
-            padding: 0 20px;
-        }
-
-        .section-card {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            padding: 50px 40px;
-            margin: 40px 0;
-            position: relative;
-            transition: all 0.6s ease;
-        }
-
-        .section-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(255, 255, 255, 0.2);
-            background: rgba(255, 255, 255, 0.06);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-        }
-
-        .section-title {
-            font-size: 2.4rem;
-            margin-bottom: 32px;
-            text-align: center;
-            font-weight: 700;
-            background: linear-gradient(135deg, #ffffff 0%, #ff968f 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            position: relative;
-        }
-
-        .section-content {
-            max-width: 800px;
-            margin: 0 auto;
-            font-size: 1.2rem;
-            line-height: 1.8;
-            color: rgba(226, 232, 240, 0.85);
-            text-align: center;
-        }
-
-        .section-content p {
-            margin-bottom: 24px;
-        }
-
-        .mission {
-            background: rgba(255, 150, 143, 0.05);
-            border: 1px solid rgba(255, 150, 143, 0.2);
-        }
-
-        .mission .section-title {
-            background: linear-gradient(135deg, #ff968f 0%, #ffffff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .what-we-do {
-            background: rgba(237, 96, 113, 0.05);
-            border: 1px solid rgba(237, 96, 113, 0.2);
-        }
-
-        .what-we-do .section-title {
-            background: linear-gradient(135deg, #ed6071 0%, #ffffff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .current-focus {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .current-focus .section-title {
-            background: linear-gradient(135deg, #ffffff 0%, #ff968f 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .section-card::before {
+        .project-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #ff968f, transparent);
+            right: 0;
+            height: 3px;
+            background: var(--accent-color);
             opacity: 0;
-            transition: opacity 0.6s ease;
-            border-radius: 10px 10px 0 0;
+            transition: opacity 0.3s ease;
         }
 
-        .mission::before {
-            background: linear-gradient(90deg, transparent, #ff968f, transparent);
-        }
-
-        .what-we-do::before {
-            background: linear-gradient(90deg, transparent, #ed6071, transparent);
-        }
-
-        .current-focus::before {
-            background: linear-gradient(90deg, transparent, #ffffff, transparent);
-        }
-
-        .section-card:hover::before {
+        .project-card:hover::before {
             opacity: 1;
         }
 
-        .dev-indicator {
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.07);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-card.aegis { --accent-color: #ff968f; }
+        .project-card.shadow { --accent-color: #ed6071; }
+        .project-card.future { --accent-color: #a78bfa; }
+
+        .project-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .project-title-area {
+            display: flex;
+            align-items: flex-start;
+            flex: 1;
+        }
+
+        .project-icon {
+            width: 50px;
+            height: 50px;
+            margin-right: 20px;
+            color: var(--accent-color);
+            flex-shrink: 0;
+        }
+
+        .project-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .project-details-btn {
             display: inline-flex;
             align-items: center;
-            background: rgba(255, 150, 143, 0.1);
-            color: #ff968f;
             padding: 8px 16px;
-            border-radius: 25px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            margin-bottom: 24px;
-            border: 1px solid rgba(255, 150, 143, 0.3);
-        }
-
-        .dev-indicator::before {
-            content: '🚀';
-            margin-right: 8px;
-        }
-
-        .highlight-text {
-            color: #ff968f;
+            background: var(--accent-color);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.85rem;
             font-weight: 600;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            margin-left: 15px;
+        }
+
+        .project-details-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-details-btn svg {
+            width: 14px;
+            height: 14px;
+            margin-left: 6px;
+        }
+
+        .project-status {
+            display: inline-block;
+            font-size: 0.8rem;
+            color: var(--accent-color);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 4px 12px;
+            border-radius: 12px;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            border: 1px solid var(--accent-color);
+            margin-bottom: 15px;
+        }
+
+        .project-description {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: rgba(226, 232, 240, 0.85);
+            margin-bottom: 25px;
+        }
+
+        .project-features {
+            margin-bottom: 25px;
+        }
+
+        .project-features h4 {
+            font-size: 0.9rem;
+            color: #ff968f;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            font-size: 0.9rem;
+            color: rgba(226, 232, 240, 0.8);
+            margin-bottom: 6px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .feature-list li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 25px;
+        }
+
+        .tech-tag {
+            background: rgba(255, 255, 255, 0.08);
+            color: rgba(226, 232, 240, 0.9);
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .project-links {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(226, 232, 240, 0.7);
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .project-link:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: rgba(226, 232, 240, 0.9);
+        }
+
+        .project-link.disabled {
+            background: rgba(255, 255, 255, 0.05);
+            color: rgba(226, 232, 240, 0.4);
+            cursor: not-allowed;
+        }
+
+        .project-link.disabled:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: rgba(226, 232, 240, 0.4);
+            transform: none;
+            box-shadow: none;
+        }
+
+        .coming-soon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .coming-soon-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 2px dashed rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .coming-soon-card:hover {
+            border-color: rgba(255, 150, 143, 0.4);
+            background: rgba(255, 150, 143, 0.02);
+        }
+
+        .coming-soon-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 20px;
+            color: rgba(255, 150, 143, 0.6);
+        }
+
+        .coming-soon-card h3 {
+            font-size: 1.3rem;
+            color: #ffffff;
+            margin-bottom: 15px;
+        }
+
+        .coming-soon-card p {
+            font-size: 0.95rem;
+            color: rgba(226, 232, 240, 0.7);
+            line-height: 1.6;
         }
 
         footer {
@@ -411,6 +433,17 @@
         .footer-text {
             color: rgba(226, 232, 240, 0.6);
             font-size: 0.9rem;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #e2e8f0;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 6px;
         }
 
         @media (max-width: 768px) {
@@ -445,72 +478,53 @@
                 display: block;
             }
 
-            .logo {
-                font-size: 3.2rem;
-                letter-spacing: -2px;
+            .page-title {
+                font-size: 2.2rem;
             }
 
-            .tagline {
-                font-size: 1.3rem;
-                margin-bottom: 36px;
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
             }
 
-            .contact-btn {
-                padding: 16px 32px;
-                font-size: 1rem;
+            .coming-soon-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
             }
 
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .section-content {
-                font-size: 1.1rem;
-                padding: 0 10px;
-            }
-
-            .section-card {
-                padding: 30px 25px;
-                margin: 30px 10px;
+            .project-card {
+                padding: 25px;
             }
 
             header {
-                padding: 120px 0 60px;
+                padding: 100px 0 40px;
+            }
+
+            .project-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .project-title-area {
+                width: 100%;
+            }
+
+            .project-details-btn {
+                margin-left: 0;
+                align-self: flex-start;
             }
         }
 
-        @media (max-width: 480px) {
-            .logo {
-                font-size: 2.8rem;
-                letter-spacing: -1px;
-            }
-
-            .tagline {
-                font-size: 1.2rem;
-            }
-
-            .section-content {
-                font-size: 1rem;
-            }
-
-            .section-card {
-                padding: 25px 20px;
-            }
-
-            .section-title {
-                font-size: 1.8rem;
-            }
-        }
-
-        .section {
+        .content-section {
             opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.8s ease forwards;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
         }
 
-        .section:nth-child(1) { animation-delay: 0.2s; }
-        .section:nth-child(2) { animation-delay: 0.4s; }
-        .section:nth-child(3) { animation-delay: 0.6s; }
+        .content-section:nth-child(1) { animation-delay: 0.1s; }
+        .content-section:nth-child(2) { animation-delay: 0.2s; }
+        .content-section:nth-child(3) { animation-delay: 0.3s; }
 
         @keyframes fadeInUp {
             to {
@@ -521,19 +535,11 @@
 
         header {
             opacity: 0;
-            animation: fadeIn 1.2s ease forwards;
+            animation: fadeIn 0.8s ease forwards;
         }
 
         @keyframes fadeIn {
             to { opacity: 1; }
-        }
-
-        .section-content p {
-            transition: color 0.3s ease;
-        }
-
-        .section-card:hover .section-content p {
-            color: rgba(226, 232, 240, 0.95);
         }
     </style>
 </head>
@@ -543,7 +549,7 @@
             <button class="nav-toggle" onclick="toggleNav()">☰</button>
             <ul class="nav-menu" id="navMenu">
                 <li class="nav-item">
-                    <a href="/index.html" class="nav-link active">
+                    <a href="/index.html" class="nav-link">
                         <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
                         </svg>
@@ -559,7 +565,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/projects.html" class="nav-link">
+                    <a href="/projects/index.html" class="nav-link active">
                         <svg xmlns="http://www.w3.org/2000/svg" class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="12" cy="12" r="3"/>
                             <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09c.66 0 1.26-.39 1.51-1a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.09c.61-.16 1-.75 1-1.37V3a2 2 0 1 1 4 0v.09c0 .66.39 1.26 1 1.51h.09c.41.17.87.11 1.22-.13a1.65 1.65 0 0 0 .6-.6 2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.09c.16.61.75 1 1.37 1H21a2 2 0 1 1 0 4h-.09c-.62 0-1.21.39-1.37 1z"/>
@@ -587,47 +593,185 @@
         </div>
     </nav>
     
-    <div class="particles">
-        <!-- Particles will be generated by JavaScript -->
-    </div>
-    
     <header>
         <div class="container">
-            <h1 class="logo">Kovrin</h1>
-            <p class="tagline">Cybersecurity Research & Development Laboratory</p>
-            <a href="/contact.html" class="contact-btn">Get In Touch</a>
+            <div class="header-content">
+                <div>
+                    <p class="page-subtitle">Development Portfolio</p>
+                    <h1 class="page-title">Research Projects</h1>
+                    <p class="page-description">Kovrin's active research initiatives focus on developing practical cybersecurity solutions through machine learning applications, privacy-preserving technologies, and innovative defense mechanisms.</p>
+                </div>
+            </div>
         </div>
     </header>
 
     <main>
         <div class="container">
-            <section class="section">
-                <div class="section-card mission">
-                    <div class="dev-indicator">Research Laboratory</div>
-                    <h2 class="section-title">Our Mission</h2>
-                    <div class="section-content">
-                        <p>Kovrin is an independent <span class="highlight-text">cybersecurity research laboratory</span> dedicated to advancing defensive capabilities through innovative machine learning applications and practical security solutions.</p>
-                        <p>We bridge the gap between academic research and real-world implementation, developing <span class="highlight-text">open-source tools and methodologies</span> that strengthen the global cybersecurity ecosystem while maintaining a focus on privacy-preserving technologies.</p>
+            <section class="content-section">
+                <div class="section-header">
+                    <span class="section-number">01</span>
+                    <div>
+                        <h2 class="section-title">Active Projects</h2>
+                        <p class="section-subtitle">Current research and development initiatives</p>
+                    </div>
+                </div>
+                <div class="projects-grid">
+                    <div class="project-card aegis">
+                        <div class="project-header">
+                            <div class="project-title-area">
+                                <svg class="project-icon" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,7C13.4,7 14.8,8.6 14.8,10V11.5C15.4,11.5 16,12.4 16,13V16C16,17.4 15.4,18 14.8,18H9.2C8.6,18 8,17.4 8,16V13C8,12.4 8.6,11.5 9.2,11.5V10C9.2,8.6 10.6,7 12,7M12,8.2C11.2,8.2 10.5,8.7 10.5,10V11.5H13.5V10C13.5,8.7 12.8,8.2 12,8.2Z"/>
+                                </svg>
+                                <div>
+                                    <h3>Project AEGIS</h3>
+                                </div>
+                            </div>
+                            <a href="/projects/aegis.html" class="project-details-btn">
+                                View Details
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/>
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="project-status">Phase I - Research</div>
+                        <div class="project-description">
+                            A lightweight, machine learning-based anomaly detection system designed for identifying unusual network traffic patterns in resource-constrained environments. AEGIS focuses on real-time threat classification with minimal computational overhead.
+                        </div>
+                        <div class="project-features">
+                            <h4>Key Features</h4>
+                            <ul class="feature-list">
+                                <li>Real-time network traffic analysis</li>
+                                <li>Lightweight ML models for edge deployment</li>
+                                <li>Adaptive threat classification algorithms</li>
+                                <li>Low-latency anomaly detection</li>
+                                <li>Resource-optimized architecture</li>
+                            </ul>
+                        </div>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">TensorFlow</span>
+                            <span class="tech-tag">Scapy</span>
+                            <span class="tech-tag">Neural Networks</span>
+                            <span class="tech-tag">Network Security</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link disabled">GitHub (Coming Soon)</a>
+                            <a href="#" class="project-link disabled">Documentation</a>
+                        </div>
+                    </div>
+
+                    <div class="project-card shadow">
+                        <div class="project-header">
+                            <div class="project-title-area">
+                                <svg class="project-icon" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12,17A2,2 0 0,0 14,15C14,13.89 13.1,13 12,13A2,2 0 0,0 10,15A2,2 0 0,0 12,17M18,8A2,2 0 0,1 20,10V20A2,2 0 0,1 18,22H6A2,2 0 0,1 4,20V10C4,8.89 4.9,8 6,8H7V6A5,5 0 0,1 12,1A5,5 0 0,1 17,6V8H18M12,3A3,3 0 0,0 9,6V8H15V6A3,3 0 0,0 12,3Z"/>
+                                </svg>
+                                <div>
+                                    <h3>Project SHADOW</h3>
+                                </div>
+                            </div>
+                            <a href="#" class="project-details-btn">
+                                Coming Soon
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/>
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="project-status">Phase I - Research</div>
+                        <div class="project-description">
+                            A privacy-preserving user behavior analytics system designed to detect insider threats and compromised accounts using machine learning techniques while maintaining user privacy through differential privacy methods.
+                        </div>
+                        <div class="project-features">
+                            <h4>Key Features</h4>
+                            <ul class="feature-list">
+                                <li>Privacy-preserving behavioral analysis</li>
+                                <li>Insider threat detection algorithms</li>
+                                <li>Differential privacy implementation</li>
+                                <li>User activity pattern recognition</li>
+                                <li>Zero-knowledge security architecture</li>
+                            </ul>
+                        </div>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Cryptography</span>
+                            <span class="tech-tag">Differential Privacy</span>
+                            <span class="tech-tag">Behavioral Analytics</span>
+                            <span class="tech-tag">UEBA</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link disabled">GitHub (Coming Soon)</a>
+                            <a href="#" class="project-link disabled">Research Paper</a>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            <section class="section">
-                <div class="section-card what-we-do">
-                    <h2 class="section-title">Research Focus</h2>
-                    <div class="section-content">
-                        <p>Our research spans <span class="highlight-text">machine learning-driven threat detection</span>, behavioral analysis for anomaly identification, and privacy-preserving security technologies. We specialize in lightweight, deployable solutions suitable for resource-constrained environments.</p>
-                        <p>Current active projects include <span class="highlight-text">Project AEGIS</span> (ML-based network anomaly detection) and <span class="highlight-text">Project SHADOW</span> (privacy-preserving behavioral analytics), both designed to address modern cybersecurity challenges with practical, scalable approaches.</p>
+            <section class="content-section">
+                <div class="section-header">
+                    <span class="section-number">02</span>
+                    <div>
+                        <h2 class="section-title">Future Initiatives</h2>
+                        <p class="section-subtitle">Planned research directions and upcoming projects</p>
+                    </div>
+                </div>
+                <div class="coming-soon-grid">
+                    <div class="coming-soon-card">
+                        <svg class="coming-soon-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M9,12L11,14L15,10L13.59,8.59L11,11.17L9.41,9.59L8,11M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4Z"/>
+                        </svg>
+                        <h3>Threat Intelligence Platform</h3>
+                        <p>Automated threat intelligence aggregation and analysis system using natural language processing to process security feeds and generate actionable insights.</p>
+                    </div>
+
+                    <div class="coming-soon-card">
+                        <svg class="coming-soon-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M16,6L18.29,8.29L13.41,13.17L9.41,9.17L2,16.59L3.41,18L9.41,12L13.41,16L19.71,9.71L18.29,8.29L16,6Z"/>
+                        </svg>
+                        <h3>ML-Powered Firewall</h3>
+                        <p>Next-generation firewall with integrated machine learning capabilities for dynamic rule generation and advanced persistent threat detection.</p>
+                    </div>
+
+                    <div class="coming-soon-card">
+                        <svg class="coming-soon-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19,3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3M19,5V19H5V5H19Z"/>
+                        </svg>
+                        <h3>Secure Communication Suite</h3>
+                        <p>End-to-end encrypted communication platform with advanced security features, designed for privacy-conscious organizations and individuals.</p>
                     </div>
                 </div>
             </section>
 
-            <section class="section">
-                <div class="section-card current-focus">
-                    <h2 class="section-title">Current Phase</h2>
-                    <div class="section-content">
-                        <p>Kovrin is currently in its <span class="highlight-text">research and development phase</span>, focusing on prototype validation and establishing research partnerships with academic institutions and industry collaborators.</p>
-                        <p>Our approach emphasizes <span class="highlight-text">open-source contributions</span> and transparent research methodologies, with plans to transition promising research outcomes into production-ready security tools and potential commercial applications.</p>
+            <section class="content-section">
+                <div class="section-header">
+                    <span class="section-number">03</span>
+                    <div>
+                        <h2 class="section-title">Open Source Contributions</h2>
+                        <p class="section-subtitle">Community tools and resources</p>
+                    </div>
+                </div>
+                <div class="coming-soon-grid">
+                    <div class="coming-soon-card">
+                        <svg class="coming-soon-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z"/>
+                        </svg>
+                        <h3>Security Analysis Tools</h3>
+                        <p>Collection of lightweight security analysis and penetration testing tools designed for educational purposes and security research.</p>
+                    </div>
+
+                    <div class="coming-soon-card">
+                        <svg class="coming-soon-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                        </svg>
+                        <h3>Research Publications</h3>
+                        <p>Academic papers, whitepapers, and technical documentation from Kovrin's research initiatives, available for the cybersecurity community.</p>
+                    </div>
+
+                    <div class="coming-soon-card">
+                        <svg class="coming-soon-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 3C16.42 3 20 4.79 20 7V17C20 19.21 16.42 21 12 21C7.58 21 4 19.21 4 17V7C4 4.79 7.58 3 12 3M12 5C8.69 5 6 5.9 6 7C6 8.1 8.69 9 12 9C15.31 9 18 8.1 18 7C18 5.9 15.31 5 12 5M6 12C6 13.1 8.69 14 12 14C15.31 14 18 13.1 18 12V10.5C16.79 11.57 14.53 12 12 12C9.47 12 7.21 11.57 6 10.5V12M6 17C6 18.1 8.69 19 12 19C15.31 19 18 18.1 18 17V15.5C16.79 16.57 14.53 17 12 17C9.47 17 7.21 16.57 6 15.5V17Z"/>
+                        </svg>
+                        <h3>Datasets & Models</h3>
+                        <p>Curated cybersecurity datasets and pre-trained machine learning models for threat detection and security research applications.</p>
                     </div>
                 </div>
             </section>
@@ -646,86 +790,21 @@
             navMenu.classList.toggle('active');
         }
 
-        document.addEventListener('click', function(event) {
-            const nav = document.querySelector('nav');
-            const navMenu = document.getElementById('navMenu');
-            
-            if (!nav.contains(event.target)) {
-                navMenu.classList.remove('active');
-            }
-        });
-
-        function updateActiveNav() {
-            const currentPath = window.location.pathname;
-            const navLinks = document.querySelectorAll('.nav-link');
-            
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === currentPath || 
-                    (currentPath === '/' && link.getAttribute('href') === '/index.html')) {
-                    link.classList.add('active');
-                }
-            });
-        }
-
-        updateActiveNav();
-
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        function createParticle() {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            
-            // Position particles only within viewport width
-            const leftPos = Math.random() * 100;
-            particle.style.left = leftPos + '%';
-            
-            // Randomize animation timing and duration
-            const duration = 8 + Math.random() * 4; // 8-12 seconds
-            const delay = Math.random() * 2; // 0-2 second delay
-            
-            particle.style.animation = `floatUp ${duration}s linear ${delay}s forwards`;
-            
-            // Random colors
-            const colors = ['#ff968f', '#ed6071', '#ffffff'];
-            const colorIndex = Math.floor(Math.random() * colors.length);
-            particle.style.background = colors[colorIndex];
-            
-            document.querySelector('.particles').appendChild(particle);
-            
-            // Remove particle after animation completes
-            setTimeout(() => {
-                if (particle.parentNode) {
-                    particle.parentNode.removeChild(particle);
-                }
-            }, (duration + delay + 1) * 1000);
-        }
-
-        function initParticles() {
-            // Create initial batch with staggered timing
-            for (let i = 0; i < 15; i++) {
-                setTimeout(createParticle, i * 300);
-            }
-        }
-
-        // Initialize particles after page load
         document.addEventListener('DOMContentLoaded', function() {
-            setTimeout(initParticles, 500); // Wait for page to fully load
+            const links = document.querySelectorAll('a[href^="#"]');
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
         });
-
-        // Continue creating particles at intervals
-        setInterval(createParticle, 600);
     </script>
 </body>
 </html>
